@@ -173,10 +173,43 @@ WITH (id uniqueidentifier '$.id',
 /******************************************************/
 
 /* Show Data */
-select * from @FolderData;
-select * from @ItemData;
-select * from @Fields;
-select * from @Logins;
-select * from @Login_Uris;
-select * from @Identities;
-select * from @Cards;
+--select * from @FolderData;
+--select * from @ItemData;
+--select * from @Fields;
+--select * from @Logins;
+--select * from @Login_Uris;
+--select * from @Identities;
+--select * from @Cards;
+
+/* Populate DB Tables */
+
+insert into dbo.[folder] (folderid, folder_name)
+select id, [name] from @FolderData;
+
+insert into dbo.[item] (itemid, organizationid, folderid, type, name, notes, favorite, collectionIds)
+select id, organizationid, folderid, type, name, notes, favorite, collectionIds from @ItemData
+
+insert into dbo.field (itemid, field_name, field_value, field_type)
+select id, field_name, field_value, field_type from @Fields
+
+insert into dbo.[login] (itemid, username, password, totp)
+select id, username, password, totp from @Logins
+
+insert into dbo.login_uri (itemid, match, uri)
+select id, match, uri from @Login_Uris;
+
+insert into dbo.[identity] (itemid, title, firstName, middleName, lastName, address1, address2, address3, city, state, postalcode, country, company, email, phone, ssn, username, passportNumber, licenseNumber)
+select id, title, firstName, middleName, lastName, address1, address2, address3, city, state, postalcode, country, company, email, phone, ssn, username, passportNumber, licenseNumber from @Identities;
+
+insert into dbo.[card] (itemid, cardHolderName, brand, number, expMonth, expYear, code)
+select id, cardHolderName, brand, number, expMonth, expYear, code from @Cards;
+
+
+
+
+
+
+
+
+
+
