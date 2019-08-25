@@ -18,3 +18,5 @@ SELECT
 from item a
 left join folder b on a.folderid = b.folderid
 inner join item_type c on a.type = c.item_typeid
+
+select * from dbo.vw_allItems
