@@ -40,7 +40,8 @@ Create table field_type (
 CREATE TABLE dbo.folder
 (	folderid UNIQUEIDENTIFIER PRIMARY KEY,
 	folder_name nvarchar(128),
-	created datetime default getdate()
+	created datetime default getdate(),
+	modified datetime
 );
 CREATE TABLE dbo.item
 (	itemid UNIQUEIDENTIFIER PRIMARY KEY,
