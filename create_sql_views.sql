@@ -2,6 +2,7 @@
 /* Written By: Jason Buss                   */
 /* Created on: 2019-08-25                   */
 /********************************************/
+use bwArchive
 
 IF object_id(N'dbo.vw_allItems', 'V') IS NOT NULL
 	DROP VIEW dbo.vw_allItems
@@ -17,6 +18,8 @@ SELECT
 ,	a.created as CreatedOn
 from item a
 left join folder b on a.folderid = b.folderid
-inner join item_type c on a.type = c.item_typeid
+inner join item_type c on a.type = c.item_typeid;
+GO
 
 select * from dbo.vw_allItems
+go
